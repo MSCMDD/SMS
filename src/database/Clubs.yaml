@@ -1,0 +1,36 @@
+index:
+  name: 辽科大社团
+  navdetail: 辽宁科技大学社团
+  detial: 空气动力学及飞行器原理及制造研究社
+  navs:
+    - value: 社团联谊
+      to: /kfres/resource/
+    - value: 全部社团
+      to: /kfres/models/
+
+kfres:
+  name: 空飞研究社
+  navdetail: 辽宁科技大学社团
+  detial: 空气动力学及飞行器原理及制造研究社
+  navs:
+    - value: 博客
+      to: /kfres/blog/
+    - value: 资料
+      to: /kfres/resource/
+    - value: 模型
+      to: /kfres/models/
+    - value: 组织架构
+      to: /kfres/models/
+
+resource:
+  name: 资源区
+  navdetail: 社团资源区
+  detial: 空气动力学及飞行器原理及制造研究社
+
+setting:
+  name: 设置
+  navdetail: 调整页面设置
+  detial: 空气动力学及飞行器原理及制造研究社
+  navs:
+    - value: 关于
+      to: /setting/about/
