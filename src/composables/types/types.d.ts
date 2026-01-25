@@ -16,3 +16,10 @@ export interface ClubType {
 export interface ClubsType {
   [Club: string]: ClubType
 }
+
+interface MdFile {
+  title: string // 标题，字符串类型
+  cover?: string // 封面图 URL，可选属性
+  tags?: string[] // 标签数组，可选属性
+  desc?: string // 描述，可选属性
+}

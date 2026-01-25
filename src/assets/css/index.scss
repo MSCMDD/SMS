@@ -2,7 +2,7 @@
 // 导入 Markdown 基础样式（GitHub 风格）
 // @use 'github-markdown-css/github-markdown.css'
 // @use './markdown'
-00@use 'highlight.js/styles/github-dark.css';
+@use 'highlight.js/styles/github-dark.css';
 @use './markdown' as local;
 
 * {

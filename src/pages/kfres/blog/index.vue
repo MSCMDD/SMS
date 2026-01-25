@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import Card from '@/components/Card/Card.vue'
 import Swiper from '@/components/Swiper/Swiper.vue'
+import type { MdFile } from '@/composables/types/types'
 const data = [
   {
     imgurl: '/kkk.png',
@@ -23,7 +24,9 @@ const convertToRoute = (filePath: string) => {
   return `${filePath.replace('/src/pages', '').replace('.md', '')}`
 }
 
-const mdFiles = import.meta.glob('/src/pages/kfres/blog/**/*.md', { eager: true })
+const mdFiles: Record<string, MdFile> = import.meta.glob('/src/pages/kfres/blog/**/*.md', {
+  eager: true,
+})
 console.log(mdFiles)
 </script>
 
