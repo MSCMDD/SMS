@@ -61,6 +61,7 @@ const isActive = ref<boolean>(false)
   top: 0;
   right: 0;
   flex-direction: column;
+  background-color: var(--bg-color);
   width: 280px;
   height: 100vh;
   transition: all 0.5s;
