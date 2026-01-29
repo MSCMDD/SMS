@@ -72,7 +72,7 @@ const y_pointc = () => {
       border-radius: 3px;
       margin-block: 5px;
       width: 4px;
-      background-color: var(--nav-bg-color);
+      background-color: var(--border-color);
       flex-grow: 1;
       transition: flex-grow 0.3s;
       &.active {

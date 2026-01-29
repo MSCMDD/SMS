@@ -2,6 +2,7 @@
   <LNav />
   <main>
     <slot />
+    <Footer />
   </main>
   <RNav />
 </template>
@@ -14,7 +15,6 @@ main {
   left: 45px;
   right: 280px;
   flex-direction: column;
-  margin: 1rem;
   justify-content: space-between;
   align-items: center;
   min-height: 100vh;

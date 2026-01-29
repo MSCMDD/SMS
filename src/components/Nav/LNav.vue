@@ -82,6 +82,7 @@ const search = ref(false)
 </template>
 
 <style lang="scss">
+@use '/src/assets/css/variables.scss' as vars;
 .l_nav {
   position: fixed;
   top: 0;
@@ -92,8 +93,9 @@ const search = ref(false)
   align-items: center;
   width: 45px;
   height: 100vh;
-  background-color: var(--nav-bg-color);
   transition: all 0.5s;
+  border-right: 1px solid var(--border-color);
+  background-color: var(--bg-color);
   z-index: 200;
   // @media响应式查询适配不同屏幕
   @media screen and (max-width: 240px) {
@@ -107,16 +109,30 @@ const search = ref(false)
     .l_btn {
       padding-block: 10px;
       width: 100%;
+      position: relative;
+      height: 45px;
       border-width: 0;
-      transition: background-color 0.5s;
-      background-color: var(--nav-bg-color);
+      background-color: transparent;
+      transition: 0.5s background-color;
       &:hover {
-        background-color: antiquewhite;
+        background-color: #{vars.$hover-primary};
       }
       &.active {
-        background-color: aliceblue;
+        background-color: #{vars.$active-primary};
+      }
+
+      svg {
+        fill: var(--text-color);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
       }
       .logo {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
         height: 28px;
       }
     }
@@ -128,7 +144,6 @@ const search = ref(false)
   width: 240px;
 
   z-index: 190;
-  background: rgba(214, 208, 208, 0.4);
   -webkit-backdrop-filter: blur(4px);
   backdrop-filter: blur(4px);
   transition: left 0.2s;

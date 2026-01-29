@@ -63,10 +63,8 @@ const isActive = ref<boolean>(false)
   flex-direction: column;
   width: 280px;
   height: 100vh;
-  background: rgba(214, 208, 208, 0.4);
-  -webkit-backdrop-filter: blur(4px);
-  backdrop-filter: blur(4px);
   transition: all 0.5s;
+  border-left: 1px solid var(--border-color);
   z-index: 200;
   // @media响应式查询适配不同屏幕
   @media screen and (max-width: 720px) {
@@ -98,9 +96,11 @@ const isActive = ref<boolean>(false)
         font-size: 2rem;
         font-weight: 900;
         line-height: 1.2;
+        color: var(--text-color);
       }
       .detial {
         line-height: 1.2;
+        color: var(--text-color);
       }
     }
   }

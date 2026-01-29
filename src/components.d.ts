@@ -14,6 +14,7 @@ declare module 'vue' {
     Card: typeof import('./components/Card/Card.vue')['default']
     Context: typeof import('./components/Markdown/Context.vue')['default']
     Divider: typeof import('./components/Divider/Divider.vue')['default']
+    Footer: typeof import('./components/Footer/Footer.vue')['default']
     LNav: typeof import('./components/Nav/LNav.vue')['default']
     RNav: typeof import('./components/Nav/RNav.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

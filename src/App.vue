@@ -19,6 +19,7 @@ import Layout from './layouts/Layout.vue'
   // 添加必要的布局属性
   height: 100%
   width: 100%
+  padding: 1rem;
 
 .fade-enter-active,
 .fade-leave-active

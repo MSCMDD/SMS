@@ -32,8 +32,10 @@ const push = (url: string | undefined) => {
   flex-direction: column;
   min-width: v-bind("$props.height * 1.5 + 'px'");
   background: var(--bg-color);
-  border: 0.5px var(--border-color) outset;
+  border: 0.5px solid var(--border-color);
   border-radius: 3px;
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(113, 113, 122, 0.2);
   height: v-bind('height + "px"');
   // @media响应式查询适配不同屏幕
   @media screen and (max-width: 720px) {
