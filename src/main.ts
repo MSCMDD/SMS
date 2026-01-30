@@ -1,6 +1,7 @@
 // main.ts
 import { ViteSSG } from 'vite-ssg' // 替换 Vue 的 createApp
 import { createPinia } from 'pinia'
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import { createHead } from '@unhead/vue/client'
 import routes from 'virtual:generated-pages'
 import './assets/css/index.scss'
@@ -31,6 +32,7 @@ export const createApp = ViteSSG(
   ({ app, router, initialState }) => {
     // ===== 1. 状态管理 =====
     const pinia = createPinia()
+    pinia.use(piniaPluginPersistedstate)
     app.use(pinia)
 
     // 初始化 Pinia 状态 (SSR 兼容)

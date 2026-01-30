@@ -23,6 +23,7 @@
     "@unhead/vue": "^2.1.2",
     "oh-vue-icons": "1.0.0-rc3",
     "pinia": "^3.0.4",
+    "pinia-plugin-persistedstate": "^4.7.1",
     "sass-embedded": "^1.97.3",
     "unplugin-vue-markdown": "^29.2.0",
     "vue": "^3.5.27",

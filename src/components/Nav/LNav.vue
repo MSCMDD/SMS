@@ -1,82 +1,111 @@
 <script setup lang="ts">
-import { onMounted, ref, watchEffect } from 'vue'
+import { ref } from 'vue'
+import { GlobalClickListener } from '@/composables/click'
 import KFLogo from '@/assets/img/kfres.png'
 import { useRoute } from 'vue-router'
 import { computed } from 'vue'
 import Divider from '../Divider/Divider.vue'
 import Search from '../Search/Search.vue'
+import { useThemeStore } from '@/stores/Theme'
+import { storeToRefs } from 'pinia'
+
+const themeStore = useThemeStore()
+const { theme } = storeToRefs(themeStore)
+const { settheme } = themeStore
+
 const route = useRoute()
 const NavType = computed(() => {
   const NavType = route.path.split('/')[1] || 'index' // 处理空路径
   return NavType
 })
 
-const DarkMode = ref({
-  mode: 0, // 0 跟随系统; 1 Light; 2 Dark
-  icon: 'md-computer',
-})
-
-onMounted(() => {
-  watchEffect(() => {
-    if (DarkMode.value.mode == 1) {
-      document.body.setAttribute('data-theme', 'false')
-      DarkMode.value.icon = 'md-wbsunny-outlined'
-    } else if (DarkMode.value.mode == 2) {
-      document.body.setAttribute('data-theme', 'true')
-      DarkMode.value.icon = 'md-tsunami-outlined'
-    } else {
-      if (DarkMode.value.mode > 2) {
-        DarkMode.value.mode = 0
-        DarkMode.value.icon = 'md-computer'
-      }
-      document.body.removeAttribute('data-theme')
-    }
-  })
-})
-
 const search = ref(false)
+
+const listener = GlobalClickListener.getInstance()
+listener.register((event) => {
+  const target = event.target as HTMLElement
+  if (
+    search.value == true &&
+    !target.closest('.l_nav-search') &&
+    !target.closest('.l_btn[class*="active"]') &&
+    !target.closest('.tooltip-content')
+  ) {
+    search.value = false
+  }
+})
 </script>
 
 <template>
   <div class="l_nav">
     <div class="l_nav-block">
-      <button class="l_btn" :class="{ active: NavType == 'index' }" @click="$router.push('/')">
-        <v-icon name="md-gridview" scale="1.5" fill="black" />
-      </button>
-      <button
-        class="l_btn"
-        :class="{ active: NavType == 'kfres' }"
-        @click="$router.push('/kfres/')"
-      >
-        <img class="logo" :src="KFLogo" />
-      </button>
-      <button
-        class="l_btn"
-        :class="{ active: NavType == 'resource' }"
-        @click="$router.push('/resource/')"
-      >
-        <v-icon name="md-book" scale="1.5" fill="black" />
-      </button>
+      <Tooltip position="right">
+        <template #trigger>
+          <button class="l_btn" :class="{ active: NavType == 'index' }" @click="$router.push('/')">
+            <v-icon name="md-gridview" scale="1.5" fill="black" />
+          </button>
+        </template>
+        <template #content>主页</template>
+      </Tooltip>
+      <Tooltip position="right">
+        <template #trigger>
+          <button
+            class="l_btn"
+            :class="{ active: NavType == 'kfres' }"
+            @click="$router.push('/kfres/')"
+          >
+            <img class="logo" :src="KFLogo" />
+          </button>
+        </template>
+        <template #content>空飞研究社</template>
+      </Tooltip>
+      <Tooltip position="right">
+        <template #trigger>
+          <button
+            class="l_btn"
+            :class="{ active: NavType == 'resource' }"
+            @click="$router.push('/resource/')"
+          >
+            <v-icon name="md-book" scale="1.5" fill="black" />
+          </button>
+        </template>
+        <template #content>资源区</template>
+      </Tooltip>
       <Divider />
-      <button class="l_btn" :class="{ active: search == true }" @click="search = !search">
-        <v-icon name="md-managesearch-twotone" scale="1.5" fill="black" />
-      </button>
+
+      <Tooltip position="right">
+        <template #trigger>
+          <button class="l_btn" :class="{ active: search == true }" @click="search = !search">
+            <v-icon name="md-managesearch-twotone" scale="1.5" fill="black" />
+          </button>
+        </template>
+        <template #content>搜索</template>
+      </Tooltip>
     </div>
     <div class="l_nav-block">
       <Divider />
-      <button
-        class="l_btn"
-        :class="{ active: NavType == 'setting' }"
-        @click="$router.push('/setting/')"
-      >
-        <v-icon name="md-settings-outlined" scale="1.5" />
-      </button>
-      <button class="l_btn" @click="DarkMode.mode += 1">
-        <v-icon :name="DarkMode.icon" scale="1.5" />
-      </button>
+      <Tooltip position="right">
+        <template #trigger>
+          <button
+            class="l_btn"
+            :class="{ active: NavType == 'setting' }"
+            @click="$router.push('/setting/')"
+          >
+            <v-icon name="md-settings-outlined" scale="1.5" />
+          </button>
+        </template>
+        <template #content>设置</template>
+      </Tooltip>
+      <Tooltip position="right">
+        <template #trigger>
+          <button class="l_btn" @click="settheme()">
+            <v-icon :name="theme.icon" scale="1.5" />
+          </button>
+        </template>
+        <template #content>切换主题</template>
+      </Tooltip>
     </div>
   </div>
-  <div class="l_nav-search" :class="{ active: search == true }">
+  <div class="l_nav-search" :class="{ active: search == true }" @click.stop="">
     <Search v-model="search" />
   </div>
 </template>
@@ -108,7 +137,7 @@ const search = ref(false)
     align-items: center;
     .l_btn {
       padding-block: 10px;
-      width: 100%;
+      width: 45px;
       position: relative;
       height: 45px;
       border-width: 0;
@@ -148,6 +177,9 @@ const search = ref(false)
   backdrop-filter: blur(4px);
   transition: left 0.2s;
   left: -195px;
+  @media screen and (max-width: 240px) {
+    left: -235px;
+  }
   &.active {
     left: 45px;
   }

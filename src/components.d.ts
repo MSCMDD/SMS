@@ -23,5 +23,6 @@ declare module 'vue' {
     SearchCell: typeof import('./components/Search/SearchCell.vue')['default']
     Swiper: typeof import('./components/Swiper/Swiper.vue')['default']
     SwiperItem: typeof import('./components/Swiper/SwiperItem.vue')['default']
+    Tooltip: typeof import('./components/Tooltip/Tooltip.vue')['default']
   }
 }

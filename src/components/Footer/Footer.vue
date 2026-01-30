@@ -6,7 +6,7 @@
       <p>Footer Content</p>
     </div>
     <div class="footer-bottom">
-      <p>Footer Bottom Content</p>
+      <p>Powered by Vue.js & Rust</p>
     </div>
   </div>
 </template>
@@ -17,6 +17,7 @@
   padding: 2rem;
   // background: #f5f5f5;
   background: var(--footer-bg-color);
+  transition: 0.5s background;
   border-top: 1px solid var(--border-color);
   p {
     margin-block-start: 0;
