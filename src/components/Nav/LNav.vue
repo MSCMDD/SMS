@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { GlobalClickListener } from '@/composables/click'
 import KFLogo from '@/assets/img/kfres.png'
 import { useRoute } from 'vue-router'
@@ -20,18 +20,19 @@ const NavType = computed(() => {
 })
 
 const search = ref(false)
-
-const listener = GlobalClickListener.getInstance()
-listener.register((event) => {
-  const target = event.target as HTMLElement
-  if (
-    search.value == true &&
-    !target.closest('.l_nav-search') &&
-    !target.closest('.l_btn[class*="active"]') &&
-    !target.closest('.tooltip-content')
-  ) {
-    search.value = false
-  }
+onMounted(() => {
+  const listener = GlobalClickListener.getInstance()
+  listener.register((event) => {
+    const target = event.target as HTMLElement
+    if (
+      search.value == true &&
+      !target.closest('.l_nav-search') &&
+      !target.closest('.l_btn[class*="active"]') &&
+      !target.closest('.tooltip-content')
+    ) {
+      search.value = false
+    }
+  })
 })
 </script>
 

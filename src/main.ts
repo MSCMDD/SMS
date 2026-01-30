@@ -32,7 +32,9 @@ export const createApp = ViteSSG(
   ({ app, router, initialState }) => {
     // ===== 1. 状态管理 =====
     const pinia = createPinia()
-    pinia.use(piniaPluginPersistedstate)
+    if (!import.meta.env.SSR) {
+      pinia.use(piniaPluginPersistedstate)
+    }
     app.use(pinia)
 
     // 初始化 Pinia 状态 (SSR 兼容)
